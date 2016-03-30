@@ -1,5 +1,8 @@
-My Vim 
-===
+#My Vim 
+======
+
+## Plugin manager
+-----------------
 
 There is my **vimrc**. I use vim-plug as plugin manager. If it doesn't exist in your _.vim/autoload/_, it will be download with:
 ```bash
@@ -15,6 +18,10 @@ and it will install all missing plugins in _~/.vim/plugged/_. You can change thi
 ``` vimrc
 call plug#begin('~/.vim/plugged')
 ```
+
+## Installed plugin
+-------------------
+
 Currently I have this features:
 
 * pony-vim-syntax: pony language syntaxe
@@ -31,10 +38,14 @@ Currently I have this features:
 * vim-ruby : ruby mode for vim
 * simplyfold : code folding for python in vim
 * vim-crystal : syntaxe higlighting for crystal language
+* tabular : necessary for _vim-markdown_
+* vim-markdown : usefull to edit in markdown form
 
-You need to support 256 colors because of : ``set t_Co=256``
 
-The shorcuts mapped are:
+## Shortcuts
+------------
+
+The shortcuts mapped are:
 
 * `` map <F2> :bn <CR> `` : change to next buffer
 * `` map <F3> :w <CR> `` : save the current file
@@ -50,10 +61,13 @@ The shorcuts mapped are:
 * `` map <F9> :Tlist <CR> <C-W><C-H>`` : open/close tag list's current file
 * `` inoremap <F12> <C-x><C-o>`` : using ctags to complete methode.
 
+## Settings
+-----------
+
 For the tags, you need to change this line:
 ``` vimrc
 set tags+=~/.my_tags/
 ```
 with your own ctags folder.
 
-Then there is the coloration.
+You need to support 256 colors because of : ``set t_Co=256``
