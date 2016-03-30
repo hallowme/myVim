@@ -24,6 +24,8 @@ Plug 'kevinw/pyflakes-vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tmhedberg/simpylfold'
 Plug 'rhysd/vim-crystal'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 ""______________________________________________________________""
@@ -168,6 +170,10 @@ set completeopt=menuone,menu,longest,preview
 
 "" code folding
 let g:SimpylFold_fold_docstring = 0
+
+"" configuration markdown
+let g:vim_markdown_math = 1
+let g:vim_markdown_new_list_item_indent = 2
 
 
 "" coloration 
