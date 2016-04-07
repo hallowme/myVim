@@ -26,6 +26,7 @@ Plug 'tmhedberg/simpylfold'
 Plug 'rhysd/vim-crystal'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'toyamarinyon/vim-swift'
 call plug#end()
 
 ""______________________________________________________________""
@@ -56,6 +57,9 @@ set background=dark
 
 "" auto complétion bracket
 map {<Return>	{<Return>}<Esc>ko
+
+"" ajout des ` pour le markdown
+inoremap `` ```<Esc>A
 
 "" next or preview buffer
 map <F2> :bn <CR>
@@ -98,8 +102,12 @@ map <F7> :bd<CR>
 map <S-F7> :q<CR>
 
 "" on compile grâce à make, et on run
-map <F8> :make<CR>
-map <S-F8> :make run<CR>
+map <F8> :SyntasticToggleMode<CR>
+map <S-F8> :make <CR>
+
+"" si c'est du markdown, on fait gaffe au folding
+au BufEnter *.md map <F8> :set nofoldenable <CR>
+au BufEnter *.md map <S-F8> :set foldenable <CR>
 
 "" on ouvre une liste des tags
 map <F9> :Tlist <CR> <C-W><C-H>
@@ -174,7 +182,8 @@ let g:SimpylFold_fold_docstring = 0
 "" configuration markdown
 let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 2
-
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_folding_style_pythonic = 1
 
 "" coloration 
 hi Normal           ctermfg=255
