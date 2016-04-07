@@ -40,6 +40,7 @@ Currently I have this features:
 * vim-crystal : syntaxe higlighting for crystal language
 * tabular : necessary for _vim-markdown_
 * vim-markdown : usefull to edit in markdown form
+* vim-siwft : syntaxe for swift language
 
 
 ## Shortcuts
@@ -56,7 +57,7 @@ The shortcuts mapped are:
 * `` map <S-F6> :set hlsearch <CR>`` : disable it
 * `` map <F7> :bd <CR>`` : close the current buffer
 * `` map <S-F7> :q <CR>`` : close the editor
-* `` map <F8> :make<CR> `` : launch make command
+* `` map <F8> :SyntasticToggleMode <CR> `` : open/close the window with syntastic's warning
 * `` map <S-F8> :make run<CR>`` : launc make run command
 * `` map <F9> :Tlist <CR> <C-W><C-H>`` : open/close tag list's current file
 * `` inoremap <F12> <C-x><C-o>`` : using ctags to complete methode.
