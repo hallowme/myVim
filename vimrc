@@ -40,7 +40,6 @@ set showmode
 set ruler
 set showcmd
 set mouse=a
-set guifont=Monospace\ 12
 set cursorline
 set ignorecase
 set smartcase
@@ -51,6 +50,10 @@ set autochdir " changer automatiquement de dossier a l'ouverture
 set showbreak=↪ " See this char when wrapping text
 set t_Co=256
 set background=dark
+set ttyfast " faster refraw
+set incsearch " search as typing"
+set history=256 "keep 256 undo"
+set hlsearch 
  
 
 ""______________________________________________________________""
