@@ -72,3 +72,9 @@ set tags+=~/.my_tags/
 with your own ctags folder.
 
 You need to support 256 colors because of : ``set t_Co=256``
+
+``` vimrc
+set history=256
+```
+Keep 256 undo.
+
