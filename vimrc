@@ -20,13 +20,12 @@ Plug 'keith/investigate.vim'
 Plug 'raimondi/delimitmate'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'taglist.vim'
-Plug 'kevinw/pyflakes-vim'
 Plug 'vim-ruby/vim-ruby'
-Plug 'tmhedberg/simpylfold'
 Plug 'rhysd/vim-crystal'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'toyamarinyon/vim-swift'
+Plug 'klen/python-mode'
 call plug#end()
 
 ""______________________________________________________________""
@@ -78,7 +77,7 @@ au BufEnter *.c* map <S-F5> :s/\/\/// <CR>
 au BufEnter *.java map <F5> :s /^/\/\//g <CR>
 au BufEnter *.java map <S-F5> :s /\/\/// <CR>
 "" commentaire en python
-au BufEnter *.py map <F5> :s/^/\#/g <CR>
+au BufEnter *.py map <F5> :s/^/\# /g <CR>
 au BufEnter *.py map <S-F5> :s/\#// <CR>
 "" commentaire en crystal 
 au BufEnter *.cr map <F5> :s/^/\#/g <CR>
@@ -111,6 +110,9 @@ map <S-F8> :make <CR>
 "" si c'est du markdown, on fait gaffe au folding
 au BufEnter *.md map <F8> :set nofoldenable <CR>
 au BufEnter *.md map <S-F8> :set foldenable <CR>
+
+"" toogle folding python
+map <F10> za <CR> k
 
 "" on ouvre une liste des tags
 map <F9> :Tlist <CR> <C-W><C-H>
@@ -187,6 +189,24 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_no_default_key_mappings = 1
 let g:vim_markdown_folding_style_pythonic = 1
+
+"" python mode
+let g:pymode_options = 0
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_breakpoint_cmd = ''
+let g:pymode_lint_unmodified = 1
+let g:pymode_lint_message = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pylint', 'pep8', 'mccabe']
+let g:pymode_lint_cwindow = 1
+let g:pymode_rope = 0
+let g:pymode_syntax_all = 1
+let g:pymode_rope_completion = 1
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_python = 'python'
+let g:pymode_folding = 1
+let g:pymode_lint_ignore = "C1001,E501,C030,C03011,R0201,C0325"
 
 "" coloration 
 hi Normal           ctermfg=255

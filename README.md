@@ -34,13 +34,12 @@ Currently I have this features:
 * delimitmate : manage the delimitor (like brackets...)
 * vim-multiple-cursors : multiple editing like *Sublime Text*
 * taglist : manage my ctags
-* pyflakes-vim : add pyflakes code review
 * vim-ruby : ruby mode for vim
-* simplyfold : code folding for python in vim
 * vim-crystal : syntaxe higlighting for crystal language
 * tabular : necessary for _vim-markdown_
 * vim-markdown : usefull to edit in markdown form
 * vim-siwft : syntaxe for swift language
+* python-monde : full ide for python
 
 
 ## Shortcuts
