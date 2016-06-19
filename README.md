@@ -24,22 +24,19 @@ call plug#begin('~/.vim/plugged')
 
 Currently I have this features:
 
-* pony-vim-syntax: pony language syntaxe
 * the nerdtree : an explorer file in the consol
-* syntastic : syntaxe checker 
 * vim-airline : make my vim more beautiful
 * supetab : tab completion
 * vim-fugitive : git plugin for vim
-* investigate : open *Zeal* an offline documentation
+* ctrlp : easy opening files
+* neocomplete : vim code completion
 * delimitmate : manage the delimitor (like brackets...)
+* ultisnpis : vim snippest
 * vim-multiple-cursors : multiple editing like *Sublime Text*
 * taglist : manage my ctags
-* vim-ruby : ruby mode for vim
-* vim-crystal : syntaxe higlighting for crystal language
-* tabular : necessary for _vim-markdown_
-* vim-markdown : usefull to edit in markdown form
-* vim-siwft : syntaxe for swift language
 * python-monde : full ide for python
+* tcomment : easy comment
+
 
 
 ## Shortcuts
@@ -50,14 +47,12 @@ The shortcuts mapped are:
 * `` map <F2> :bn <CR> `` : change to next buffer
 * `` map <F3> :w <CR> `` : save the current file
 * `` map <F4> :NERDTreeToggle <CR> `` : toogle the file explorer
-* `` au BufEnter *.c* map <F5> :s /^/\/\//g <CR>`` : comments in ``C/C++``. It works with some other language
-* `` au BufEnter *.c* map <S-F5> :s /\/\/// <CR>`` : uncomments in ``C/C++``. It works with other language too.
+* `` map <F5> gcc<ESC> : It will toogle comment selected line. 
 * `` map <F6> :set hlsearch <CR>`` : set the highlight search
 * `` map <S-F6> :set hlsearch <CR>`` : disable it
 * `` map <F7> :bd <CR>`` : close the current buffer
 * `` map <S-F7> :q <CR>`` : close the editor
-* `` map <F8> :SyntasticToggleMode <CR> `` : open/close the window with syntastic's warning
-* `` map <S-F8> :make run<CR>`` : launc make run command
+* `` map <F8> :make : using makefile
 * `` map <F9> :Tlist <CR> <C-W><C-H>`` : open/close tag list's current file
 * `` inoremap <F12> <C-x><C-o>`` : using ctags to complete methode.
 
@@ -76,4 +71,10 @@ You need to support 256 colors because of : ``set t_Co=256``
 set history=256
 ```
 Keep 256 undo.
+
+To navigate faster.
+```vimrc
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+```
 

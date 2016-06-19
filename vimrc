@@ -10,22 +10,18 @@ endif
 
 "" utilisation d'un autre gestionnaire de plugin""
 call plug#begin('~/.vim/plugged')
-Plug 'dleonard0/pony-vim-syntax'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
-Plug 'keith/investigate.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'shougo/neocomplete.vim'
 Plug 'raimondi/delimitmate'
+Plug 'sirver/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'taglist.vim'
-Plug 'vim-ruby/vim-ruby'
-Plug 'rhysd/vim-crystal'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'toyamarinyon/vim-swift'
 Plug 'klen/python-mode'
+Plug 'tomtom/tcomment_vim'
 call plug#end()
 
 ""______________________________________________________________""
@@ -57,11 +53,8 @@ set hlsearch
 
 ""______________________________________________________________""
 
-"" auto complétion bracket
-map {<Return>	{<Return>}<Esc>ko
 
-"" ajout des ` pour le markdown
-inoremap `` ```<Esc>A
+inoremap jk <Esc>
 
 "" next or preview buffer
 map <F2> :bn <CR>
@@ -70,57 +63,33 @@ map <F3> :w <CR>
 "" nerd tree vim
 map <F4> :NERDTreeToggle<CR>
 
-"" commentaire en C
-au BufEnter *.c* map <F5> :s /^/\/\//g <CR>
-au BufEnter *.c* map <S-F5> :s/\/\/// <CR>
-"" commentaire en java
-au BufEnter *.java map <F5> :s /^/\/\//g <CR>
-au BufEnter *.java map <S-F5> :s /\/\/// <CR>
-"" commentaire en python
-au BufEnter *.py map <F5> :s/^/\# /g <CR>
-au BufEnter *.py map <S-F5> :s/\#// <CR>
-"" commentaire en crystal 
-au BufEnter *.cr map <F5> :s/^/\#/g <CR>
-au BufEnter *.cr map <S-F5> :s/\#// <CR>
-"" commentaire prolog
-au BufEnter *.pl map <F5> :s/^/\%/g <CR>
-au BufEnter *.pl map <S-F5> :s/%// <CR>
-"" commentaire Makeilfe
-au BufEnter Makefile map <F5> :s/^/#/g <CR>
-au BufEnter Makefile map <S-F5> :s/#// <CR>
-"" commentaire .vimrc
-au BufEnter .vimrc map <F5> :s/^/\"\"/g <CR>
-au BufEnter .vimrc map <S-F5> :s/\"\"// <CR>
-"" commentaire R
-au BufEnter *.R map <F5> :s/^/\#/g <CR>
-au BufEnter *.R map <S-F5> :s/\#// <CR>
+" for comment the line
+map <F5> gcc<ESC>
 
 "" enclanche ou non le hlsearch
 map <F6> :set hlsearch <CR>
 map <s-F6> :set hlsearch! <CR>
 
 ""fermer onglet ou l'éditeur
-map <F7> :bd<CR>
-map <S-F7> :q<CR>
+ map <F7> :bd<CR>
+ map <S-F7> :q<CR>
+"" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "" on compile grâce à make, et on run
-map <F8> :SyntasticToggleMode<CR>
-map <S-F8> :make <CR>
-
-"" si c'est du markdown, on fait gaffe au folding
-au BufEnter *.md map <F8> :set nofoldenable <CR>
-au BufEnter *.md map <S-F8> :set foldenable <CR>
-
-"" toogle folding python
-map <F10> za <CR> k
+" map <F8> :SyntasticToggleMode<CR>
+map <F8> :make <CR>
 
 "" on ouvre une liste des tags
 map <F9> :Tlist <CR> <C-W><C-H>
 
+"" toogle folding python
+map <F10> za <CR> k
 
 "" Completion python :
 inoremap <F12> 	 <C-x><C-o>
-
 
 "" pour qu'on détecte prolog et pas perl
 let g:filetype_pl="prolog"
@@ -129,6 +98,8 @@ let g:filetype_pl="prolog"
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+" neocomplete enable
+let g:neocomplete#enable_at_startup = 1
 
 "" vim airline, much beautiful 
 let g:airline#extensions#tabline#enabled = 1
@@ -141,31 +112,6 @@ set wildmode=longest,list:longest
 
 "" Tabulation configuration
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-"syntastic check the code syntaxe
-"" begin syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_python_python_exec = '/usr/bin/python2'
-let g:syntastic_loc_list_heigt=5
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-"" end config
-
-
-"" zeal : doc offline avec investiagte.vim "
-let g:investigate_command_for_python ="python"
-let g:investigate_command_for_bash="bash"
-let g:investigate_command_for_c="c"
-let g:investigate_command_for_vim="vim"
-let g:investigate_command_for_cpp="cpp"
-
-nnoremap gz :!zeal --query "<cword>"&<CR><CR>
 
 "" ctags
 set tags+=~/.my_tags/
@@ -184,12 +130,6 @@ set completeopt=menuone,menu,longest,preview
 "" code folding
 let g:SimpylFold_fold_docstring = 0
 
-"" configuration markdown
-let g:vim_markdown_math = 1
-let g:vim_markdown_new_list_item_indent = 2
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_folding_style_pythonic = 1
-
 "" python mode
 let g:pymode_options = 0
 let g:pymode_breakpoint = 1
@@ -204,7 +144,7 @@ let g:pymode_syntax_all = 1
 let g:pymode_rope_completion = 1
 let g:pymode_rope_complete_on_dot = 1
 let g:pymode_rope_completion_bind = '<C-Space>'
-let g:pymode_python = 'python'
+let g:pymode_python = 'python3'
 let g:pymode_folding = 1
 let g:pymode_lint_ignore = "C1001,E501,C030,C03011,R0201,C0325"
 
