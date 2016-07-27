@@ -52,7 +52,7 @@ The shortcuts mapped are:
 * `` map <S-F6> :set hlsearch <CR>`` : disable it
 * `` map <F7> :bd <CR>`` : close the current buffer
 * `` map <S-F7> :q <CR>`` : close the editor
-* `` map <F8> :make : using makefile
+* `` map <F8> :make `` : using makefile
 * `` map <F9> :Tlist <CR> <C-W><C-H>`` : open/close tag list's current file
 * `` inoremap <F12> <C-x><C-o>`` : using ctags to complete methode.
 
@@ -73,6 +73,7 @@ set history=256
 Keep 256 undo.
 
 To navigate faster.
+
 ```vimrc
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
