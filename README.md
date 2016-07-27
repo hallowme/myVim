@@ -47,7 +47,7 @@ The shortcuts mapped are:
 * `` map <F2> :bn <CR> `` : change to next buffer
 * `` map <F3> :w <CR> `` : save the current file
 * `` map <F4> :NERDTreeToggle <CR> `` : toogle the file explorer
-* `` map <F5> gcc<ESC> : It will toogle comment selected line. 
+* `` map <F5> gcc<ESC> ``: It will toogle comment selected line. 
 * `` map <F6> :set hlsearch <CR>`` : set the highlight search
 * `` map <S-F6> :set hlsearch <CR>`` : disable it
 * `` map <F7> :bd <CR>`` : close the current buffer
@@ -78,3 +78,9 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 ```
 
+#My NeoVim
+==================
+
+It's quite the same configuration as my vim settings.
+Except some plugins and keybidings.
+I let you discover this differences. 
