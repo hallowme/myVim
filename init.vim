@@ -17,6 +17,20 @@ function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 
+function! Helppers()
+	echo ":=\t\tprint the last line number"
+	echo "H\t\t1st line"
+	echo "M\t\tmiddle line"
+	echo "L\t\tlast line"
+	echo "4>>\t\tindent 4 lines to the right"
+	echo "4<<\t\tindent 4 lines to the left"
+	echo "ctrl-x ctrl-f\tautocomplete file and directory"
+	echo "di\"\t\tdelete inside quote"
+	echo "50%\t\twill move to halfway point"
+	echo "%\t\tjump to corresponing item"
+	echo "zz\t\tput the line in the middle of screen"
+endfunction
+
 "" utilisation d'un autre gestionnaire de plugin""
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
@@ -34,6 +48,8 @@ Plug 'vim-erlang/vim-erlang-runtime'
 Plug 'vim-erlang/vim-erlang-compiler'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'neomake/neomake'
+Plug 'metakirby5/codi.vim'
+Plug 'eagletmt/neco-ghc'
 call plug#end()
 
 
@@ -60,6 +76,8 @@ set showbreak=↪ " See this char when wrapping text
 set incsearch " search as typing"
 set history=256 "keep 256 undo"
 set hlsearch 
+set tabstop=4
+set shiftwidth=4
 let g:filetype_pl="prolog" "detect prolog file and not perl
  
 
@@ -102,7 +120,7 @@ map <F8> :terminal <CR>
 map <F9> :Tlist <CR> <C-W><C-H>
 
 "" ouvrir/fermer fenêtre erreur
-map <F10> :lopen<CR>
+map <F10> :Codi!! <CR>
 
 "" Completion python :
 inoremap <F12> 	 <C-x><C-o>
@@ -122,6 +140,10 @@ autocmd! BufEnter,BufWritePost * Neomake
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 "" vim airline, much beautiful 
 let g:airline#extensions#tabline#enabled = 1
