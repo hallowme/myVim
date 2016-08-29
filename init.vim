@@ -49,7 +49,7 @@ Plug 'vim-erlang/vim-erlang-compiler'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'neomake/neomake'
 Plug 'metakirby5/codi.vim'
-Plug 'eagletmt/neco-ghc'
+Plug 'fatih/vim-go'
 call plug#end()
 
 
@@ -79,6 +79,7 @@ set hlsearch
 set tabstop=4
 set shiftwidth=4
 let g:filetype_pl="prolog" "detect prolog file and not perl
+let mapleader = "\<Space>"
  
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -86,6 +87,7 @@ let g:filetype_pl="prolog" "detect prolog file and not perl
 """""""""""""""""" Keybidings """"""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
+
 
 inoremap jk <Esc>
 
@@ -135,21 +137,55 @@ nnoremap <C-y> 3<C-y>
 """""""""""""""""" Plugin Conf """"""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""
+" Config deoplete "
+"""""""""""""""""""
 " Use syntax checker
 autocmd! BufEnter,BufWritePost * Neomake
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
+"""""""""""""""""
+" Config vim-go "
+"""""""""""""""""
+let g:go_fmt_command = "goimports"
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>I <Plug>(go-imports)
+
+au FileType go nmap <Leader>e <Plug>(go-rename)
+
+
+"""""""""""""""""""""""
+" Config vim-aireline "
+"""""""""""""""""""""""
 "" vim airline, much beautiful 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
+
+"""""""""""""""""""
+" Config supertab "
+"""""""""""""""""""
 "" maping and tab completion + config
 set complete=.,b,u,]
 set wildmode=longest,list:longest
@@ -157,6 +193,10 @@ set wildmode=longest,list:longest
 "" Tabulation configuration
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+
+""""""""""""""""
+" Config ctags "
+""""""""""""""""
 "" ctags
 set tags+=~/.my_tags/
 let OmniCpp_NamespaceSearch = 1
@@ -172,6 +212,9 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 
+""""""""""""""""""""""""""""""
+" Config rainbow-parentheses "
+""""""""""""""""""""""""""""""
 " options rainbow_parentheses.vim
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
