@@ -14,23 +14,8 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
 endif
 
 
-
 function! DoRemote(arg)
   UpdateRemotePlugins
-endfunction
-
-function! Helppers()
-	echo ":=\t\tprint the last line number"
-	echo "H\t\t1st line"
-	echo "M\t\tmiddle line"
-	echo "L\t\tlast line"
-	echo "4>>\t\tindent 4 lines to the right"
-	echo "4<<\t\tindent 4 lines to the left"
-	echo "ctrl-x ctrl-f\tautocomplete file and directory"
-	echo "di\"\t\tdelete inside quote"
-	echo "50%\t\twill move to halfway point"
-	echo "%\t\tjump to corresponing item"
-	echo "zz\t\tput the line in the middle of screen"
 endfunction
 
 "" utilisation d'un autre gestionnaire de plugin""
@@ -38,7 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
-Plug 'raimondi/delimitmate'
+Plug  'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim' , { 'do': function('DoRemote') }
 Plug 'sirver/ultisnips'
 Plug 'taglist.vim'
@@ -48,6 +33,7 @@ Plug 'neomake/neomake'
 Plug 'klen/python-mode'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'philpl/vim-adventurous'
+Plug 'fatih/vim-go'
 call plug#end()
 
 
@@ -128,9 +114,19 @@ map <F10> <C-0>za
 "" Completion python :
 inoremap <F12> 	 <C-x><C-o>
 
+"" bouge ligne en dessous/dessus
+noremap <C-j> ddp
+noremap <C-k> ddkP
+
 "" aller plus vite avec ctrl+{e,y}
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+
+"" si gofile
+au BufRead,BufNewFile *.go map <leader>b :GoBuild<CR>
+au BufRead,BufNewFile *.go map <leader>r :GoRun<CR>
+au BufRead,BufNewFile *.go map <leader>f :GoFmt<CR>
+au BufRead,BufNewFile *.go map <leader>i :GoImport 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -139,12 +135,20 @@ nnoremap <C-y> 3<C-y>
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""
+" ultisnips "
+"""""""""""""
+
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 """"""""""""""
 " vim-indent "
 """"""""""""""
 let g:indent_guides_auto_colors = 1
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 
 """"""""""""""""""""""
