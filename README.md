@@ -37,6 +37,9 @@ Currently I have this features:
 * rainbow_parentheses : multiple color for brackets
 * vim-indent-guides : display indentation level
 * vim-adventurous : vim theme
+* molokai : other vim theme
+* vim-go : go ide
+* tagbar : show your function like in a ide
 
 
 
@@ -55,7 +58,7 @@ The shortcuts mapped are:
 * `` map <F7> :bd <CR>`` : close the current buffer
 * `` map <F19> :q <CR>`` : close the editor
 * `` map <F8> :terminal `` : launch terminal
-* `` map <F9> :Tlist <CR> <C-W><C-H>`` : open/close tag list's current file
+* `` map <F9> :TagbarToogle<CR>`` : open/close tag list's current file
 * `` map <F10> <C-0>za `` : toggle folde python
 * `` inoremap <F12> <C-x><C-o>`` : using ctags to complete methode.
 

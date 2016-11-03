@@ -26,7 +26,6 @@ Plug 'ervandew/supertab'
 Plug  'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim' , { 'do': function('DoRemote') }
 Plug 'sirver/ultisnips'
-Plug 'taglist.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'neomake/neomake'
@@ -34,6 +33,8 @@ Plug 'klen/python-mode'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'philpl/vim-adventurous'
 Plug 'fatih/vim-go'
+Plug 'fatih/molokai'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 
@@ -66,7 +67,7 @@ set linebreak
 set background=dark
 let g:filetype_pl="prolog" "detect prolog file and not perl
 let mapleader = "\<Space>"
-colorscheme adventurous
+colorscheme molokai
  
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -106,7 +107,9 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 map <F8> :terminal <CR>
 
 "" on ouvre une liste des tags
-map <F9> :Tlist <CR> <C-W><C-H>
+" map <F9> :Tlist <CR> <C-W><C-H>
+nmap <F9> :TagbarToggle<CR>
+
 
 "" ouvrir/fermer fenêtre erreur
 map <F10> <C-0>za
@@ -117,6 +120,9 @@ inoremap <F12> 	 <C-x><C-o>
 "" bouge ligne en dessous/dessus
 noremap <C-j> ddp
 noremap <C-k> ddkP
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
 
 "" aller plus vite avec ctrl+{e,y}
 nnoremap <C-e> 3<C-e>
@@ -134,6 +140,16 @@ au BufRead,BufNewFile *.go map <leader>i :GoImport
 """""""""""""""""" Plugin Conf """"""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""
+" vim-go "
+""""""""""
+" Highlight
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1  
 
 """""""""""""
 " ultisnips "
@@ -154,10 +170,12 @@ let g:indent_guides_guide_size = 1
 """"""""""""""""""""""
 " Config python-mode "
 """"""""""""""""""""""
-let g:pymode_lint_ignore = "E501"
 let g:pymode_lint_todo_symbol = '⚠'
 let g:pymode_lint_error_symbol = '☢'
 let g:pymode_rope_complete_on_dot = 0
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_ignore = "E501"
+let g:pymode_options_max_line_length = 799
 
 """""""""""""""""""
 " Config deoplete "
@@ -194,18 +212,18 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Config ctags "
 """"""""""""""""
 "" ctags
-set tags+=~/.my_tags/
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+" set tags+=~/.my_tags/
+" let OmniCpp_NamespaceSearch = 1
+" let OmniCpp_GlobalScopeSearch = 1
+" let OmniCpp_ShowAccess = 1
+" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" " automatically open and close the popup menu / preview window
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+" set completeopt=menuone,menu,longest,preview
 
 
 """"""""""""""""""""""""""""""
