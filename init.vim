@@ -14,9 +14,6 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
 endif
 
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
 
 "" utilisation d'un autre gestionnaire de plugin""
 call plug#begin('~/.config/nvim/plugged')
@@ -24,16 +21,16 @@ Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Shougo/deoplete.nvim' , { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim' 
 Plug 'tomtom/tcomment_vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'neomake/neomake'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'klen/python-mode'
-Plug 'philpl/vim-adventurous'
 Plug 'fatih/vim-go'
-Plug 'fatih/molokai'
+Plug 'tomasr/molokai'
 Plug 'majutsushi/tagbar'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 call plug#end()
 
 
@@ -65,6 +62,7 @@ set shiftwidth=2
 set linebreak
 set background=dark
 set clipboard=unnamedplus 	"copy/paste direct in clipboard"
+set completeopt-=preview
 let g:filetype_pl="prolog" "detect prolog file and not perl
 let mapleader = "\<Space>"
 colorscheme molokai
@@ -103,7 +101,6 @@ map <F19> :q<CR>
 " map <F8> :terminal <CR>
 
 "" on ouvre une liste des tags
-" map <F9> :Tlist <CR> <C-W><C-H>
 nmap <F9> :TagbarToggle<CR>
 
 
@@ -130,12 +127,26 @@ au BufRead,BufNewFile *.go map <leader>r :GoRun<CR>
 au BufRead,BufNewFile *.go map <leader>f :GoFmt<CR>
 au BufRead,BufNewFile *.go map <leader>i :GoImport 
 
+" au BufRead,BufNewFile,BufEnter *.go %g/\(func\_.\{-}\)\@<={/ normal! f{zf%
+" au BufRead,BufNewFile,BufEnter *.go map <leader>z zR
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""" Plugin Conf """"""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""
+" snippets ""
+""""""""""""
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 """"""""""
 " vim-go "
@@ -156,11 +167,6 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 
-""""""""""""""
-" vim-flake ""
-""""""""""""""
-autocmd FileType python map <buffer> <F8> :call Flake8()<CR>
-
 """""""""""""""
 " SimplyFold ""
 """""""""""""""
@@ -175,6 +181,9 @@ autocmd! BufEnter,BufWritePost * Neomake
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#go = 'vim-go'
+let g:deoplete#keyword_patterns = {}
+let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
 
 
 
@@ -191,11 +200,10 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " Config supertab "
 """""""""""""""""""
 "" maping and tab completion + config
-set complete=.,b,u,]
 set wildmode=longest,list:longest
 
 "" Tabulation configuration
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 
 """"""""""""""""""""""""""""""
