@@ -31,6 +31,8 @@ Plug 'tomasr/molokai'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'zchee/deoplete-go'
+Plug 'crater2150/vim-theme-chroma'
 call plug#end()
 
 
@@ -62,11 +64,10 @@ set shiftwidth=2
 set linebreak
 set background=dark
 set clipboard=unnamedplus 	"copy/paste direct in clipboard"
-set completeopt-=preview
 let g:filetype_pl="prolog" "detect prolog file and not perl
 let mapleader = "\<Space>"
-colorscheme molokai
- 
+colorscheme chroma
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -95,17 +96,12 @@ map <F18> :set hlsearch! <CR>
 map <F7> :bd<CR>
 map <F19> :q<CR>
 
-
-"" on compile grâce à make, et on run
-" map <F8> :SyntasticToggleMode<CR>
-" map <F8> :terminal <CR>
+" <F8> is unused
 
 "" on ouvre une liste des tags
 nmap <F9> :TagbarToggle<CR>
 
-
-"" ouvrir/fermer fenêtre erreur
-map <F10> <C-0>za
+" <F10> is unused
 
 "" Completion python :
 inoremap <F12> 	 <C-x><C-o>
@@ -121,14 +117,16 @@ noremap <C-h> <C-w>h
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
+
 "" si gofile
 au BufRead,BufNewFile *.go map <leader>b :GoBuild<CR>
 au BufRead,BufNewFile *.go map <leader>r :GoRun<CR>
 au BufRead,BufNewFile *.go map <leader>f :GoFmt<CR>
 au BufRead,BufNewFile *.go map <leader>i :GoImport 
+au BufRead *.go colorscheme molokai
 
-" au BufRead,BufNewFile,BufEnter *.go %g/\(func\_.\{-}\)\@<={/ normal! f{zf%
-" au BufRead,BufNewFile,BufEnter *.go map <leader>z zR
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -167,12 +165,6 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 
-"""""""""""""""
-" SimplyFold ""
-"""""""""""""""
-let g:SimpylFold_fold_import = 0
-let g:SimpylFold_fold_docstring = 0
-
 """""""""""""""""""
 " Config deoplete "
 """""""""""""""""""
@@ -181,9 +173,7 @@ autocmd! BufEnter,BufWritePost * Neomake
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#go = 'vim-go'
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
+let g:deoplete#disable_auto_complete = 1
 
 
 
@@ -199,11 +189,12 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 """""""""""""""""""
 " Config supertab "
 """""""""""""""""""
-"" maping and tab completion + config
-set wildmode=longest,list:longest
 
 "" Tabulation configuration
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
 """"""""""""""""""""""""""""""
